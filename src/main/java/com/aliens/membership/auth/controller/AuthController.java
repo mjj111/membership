@@ -24,4 +24,10 @@ public class AuthController {
     public Api<MemberInfoForToken> getMemberInfo(@LoginMember MemberInfoForToken memberInfoForToken) {
         return Api.OK(memberInfoForToken);
     }
+
+    @PostMapping("/logout")
+    public Api<String> logout(@RequestBody AuthTokenDto authTokenDto) {
+        authService.logout(authTokenDto);
+        return Api.OK("로그아웃 되었습니다.");
+    }
 }
