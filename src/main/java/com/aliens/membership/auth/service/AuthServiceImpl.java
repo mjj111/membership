@@ -1,6 +1,6 @@
 package com.aliens.membership.auth.service;
 
-import com.aliens.membership.auth.controller.AuthErrorCode;
+import com.aliens.membership.auth.errorcode.AuthErrorCode;
 import com.aliens.membership.auth.token.TokenProvider;
 import com.aliens.membership.auth.dto.AuthTokenDto;
 import com.aliens.membership.auth.dto.LoginRequestDto;

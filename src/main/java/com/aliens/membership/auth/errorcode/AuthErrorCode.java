@@ -1,4 +1,4 @@
-package com.aliens.membership.auth.controller;
+package com.aliens.membership.auth.errorcode;
 
 import com.aliens.membership.global.error.ErrorCodeIfs;
 import lombok.AllArgsConstructor;

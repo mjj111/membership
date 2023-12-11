@@ -1,6 +1,6 @@
 package com.aliens.membership.auth.token;
 
-import com.aliens.membership.auth.controller.AuthErrorCode;
+import com.aliens.membership.auth.errorcode.AuthErrorCode;
 import com.aliens.membership.auth.dto.MemberInfoForToken;
 import com.aliens.membership.global.config.JwtProperties;
 import com.aliens.membership.global.exception.ApiException;
