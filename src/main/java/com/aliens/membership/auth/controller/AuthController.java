@@ -5,7 +5,8 @@ import com.aliens.membership.auth.dto.LoginRequestDto;
 import com.aliens.membership.auth.dto.MemberInfoForToken;
 import com.aliens.membership.auth.service.AuthService;
 import com.aliens.membership.global.api.Api;
-import com.aliens.membership.global.custom.LoginMember;
+import com.aliens.membership.global.custom.jwt.LoginMember;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping()
-    public Api<AuthTokenDto> login(@RequestBody LoginRequestDto loginRequestDto) {
+    public Api<AuthTokenDto> login(@RequestBody @Valid LoginRequestDto loginRequestDto) {
         return Api.OK(authService.login(loginRequestDto));
     }
 

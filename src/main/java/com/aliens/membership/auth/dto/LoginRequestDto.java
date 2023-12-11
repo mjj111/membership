@@ -1,4 +1,8 @@
 package com.aliens.membership.auth.dto;
 
-public record LoginRequestDto(String loginId, String password) {
+import com.aliens.membership.auth.dto.validation.email.Email;
+import com.aliens.membership.auth.dto.validation.password.Password;
+
+public record LoginRequestDto(@Email String loginId, @Password String password) {
 }
+
