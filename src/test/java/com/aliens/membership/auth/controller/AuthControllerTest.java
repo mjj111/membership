@@ -1,5 +1,6 @@
 package com.aliens.membership.auth.controller;
 
+import com.aliens.membership.auth.dto.AuthTokenDto;
 import com.aliens.membership.auth.dto.LoginRequestDto;
 import com.aliens.membership.auth.entity.Member;
 import com.aliens.membership.auth.repository.MemberRepository;
@@ -91,5 +92,17 @@ class AuthControllerTest {
                 .getContentAsString();
 
         Assertions.assertNotNull(content);
+    }
+
+    @Test
+    @DisplayName("컨트롤러에서 AuthDto 를 받아 로그아웃 실행 - 성공")
+    void logoutTest() throws Exception {
+        AuthTokenDto authTokenDto = authService.login(new LoginRequestDto(givenLoginId, givenPassword));
+        String inputBody = mapper.writeValueAsString(authTokenDto);
+
+        mvc.perform(post("/auth/logout")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(inputBody))
+                .andExpect(status().isOk());
     }
 }
