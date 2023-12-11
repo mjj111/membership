@@ -16,9 +16,6 @@ import lombok.ToString;
 @Entity
 public class MemberInfo extends BaseEntity {
 
-    @Column(name = "email", nullable = false)
-    private String email;
-
     @Column(name = "name", nullable = false)
     private String name;
 
@@ -31,8 +28,8 @@ public class MemberInfo extends BaseEntity {
     private Gender gender;
 
 
-    public static MemberInfo of(String email, String name, Role role, Gender gender) {
-        return new MemberInfo(email, name, role, gender);
+    public static MemberInfo of(String name, Role role, Gender gender) {
+        return new MemberInfo(name, role, gender);
     }
 
     public MemberInfoForToken getInfoForToken() {

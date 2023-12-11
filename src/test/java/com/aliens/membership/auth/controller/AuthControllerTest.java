@@ -65,8 +65,8 @@ class AuthControllerTest {
         memberInfoRepository.deleteAll();
 
         givenLoginId = "tmp@example.com";
-        givenPassword = "password";
-        givenMemberInfo = MemberInfo.of("email","김명준", Role.ADMIN, Gender.MALE);
+        givenPassword = "passwordpasswordpassword";
+        givenMemberInfo = MemberInfo.of("김명준", Role.ADMIN, Gender.MALE);
         memberInfoRepository.save(givenMemberInfo);
         giveMember = memberRepository.save(new Member(givenLoginId,givenPassword,givenMemberInfo));
     }
