@@ -1,4 +1,4 @@
-package com.aliens.membership.global.custom;
+package com.aliens.membership.global.custom.jwt;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

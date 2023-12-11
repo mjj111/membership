@@ -1,4 +1,4 @@
-package com.aliens.membership.global.custom;
+package com.aliens.membership.global.custom.jwt;
 
 import com.aliens.membership.auth.dto.MemberInfoForToken;
 import com.aliens.membership.auth.token.TokenProvider;
