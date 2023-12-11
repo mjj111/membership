@@ -36,7 +36,8 @@ public class AuthServiceImpl implements AuthService {
     private Member getLoginMember(LoginRequestDto loginRequestDto) {
         return memberRepository.findByLoginIdAndPassword(
                 loginRequestDto.loginId(),
-                loginRequestDto.password());
+                loginRequestDto.password())
+                .orElseThrow(() -> new ApiException(AuthErrorCode.NULL_MEMBER,"없는 회원입니다."));
     }
 
     private AuthTokenDto generateAuthTokenDto(MemberInfoForToken memberInfoForToken) {
@@ -60,8 +61,13 @@ public class AuthServiceImpl implements AuthService {
     }
 
     private void expireRefreshToken(AuthTokenDto authTokenDto) {
-        RefreshToken refreshToken = refreshTokenRepository.findByRefreshToken(authTokenDto.refreshToken());
+        RefreshToken refreshToken = getRefreshToken(authTokenDto);
         refreshToken.expire();
+    }
+
+    private RefreshToken getRefreshToken(AuthTokenDto authTokenDto) {
+        return refreshTokenRepository.findByRefreshToken(authTokenDto.refreshToken())
+                .orElseThrow(() -> new ApiException(AuthErrorCode.NULL_REFRESH_TOKEN, "RefreshToken 이 조회되지 않습니다."));
     }
 
     @Override
@@ -70,7 +76,7 @@ public class AuthServiceImpl implements AuthService {
         isNotExpiredRefreshToken(authTokenDto);
         isExpiredRefreshTokenInDB(authTokenDto);
 
-        RefreshToken refreshEntity  = refreshTokenRepository.findByRefreshToken(authTokenDto.refreshToken());
+        RefreshToken refreshEntity  = getRefreshToken(authTokenDto);
         MemberInfoForToken memberInfoForToken = refreshEntity.getMemberInfoForToken();
 
         String newAccessToken = tokenProvider.generateAccessToken(memberInfoForToken);
@@ -85,7 +91,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     private void isExpiredRefreshTokenInDB(AuthTokenDto authTokenDto) {
-        RefreshToken refreshTokenEntity = refreshTokenRepository.findByRefreshToken(authTokenDto.refreshToken());
+        RefreshToken refreshTokenEntity = getRefreshToken(authTokenDto);
         if (refreshTokenEntity.isExpired()) {
             throw new ApiException(AuthErrorCode.EXPIRED_REFRESH_TOKEN, "RefreshToken 의 유효기간이 지났습니다.");
         }

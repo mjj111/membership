@@ -1,5 +1,6 @@
 package com.aliens.membership.auth.service;
 
+import com.aliens.membership.auth.controller.AuthErrorCode;
 import com.aliens.membership.auth.dto.AuthTokenDto;
 import com.aliens.membership.auth.dto.LoginRequestDto;
 import com.aliens.membership.auth.entity.Member;
@@ -7,6 +8,7 @@ import com.aliens.membership.auth.entity.RefreshToken;
 import com.aliens.membership.auth.repository.MemberRepository;
 import com.aliens.membership.auth.repository.RefreshTokenRepository;
 import com.aliens.membership.global.config.JwtProperties;
+import com.aliens.membership.global.exception.ApiException;
 import com.aliens.membership.member.entity.enums.Gender;
 import com.aliens.membership.member.entity.enums.Role;
 import com.aliens.membership.member.entity.MemberInfo;
@@ -68,7 +70,8 @@ class AuthServiceTest {
 
         authService.logout(authTokenDto);
 
-        RefreshToken refreshTokenEntity = refreshTokenRepository.findByRefreshToken(authTokenDto.refreshToken());
+        RefreshToken refreshTokenEntity = refreshTokenRepository.findByRefreshToken(authTokenDto.refreshToken())
+                .orElseThrow(() -> new ApiException(AuthErrorCode.NULL_REFRESH_TOKEN, "RefreshToken 이 조회되지 않습니다."));
         Assertions.assertTrue(refreshTokenEntity.isExpired());
     }
 

@@ -82,6 +82,16 @@ class AuthControllerTest {
     }
 
     @Test
+    @DisplayName("컨트롤러에서 없는 회원으로 로그인 시도 - 실패")
+    void loginFailTest() throws Exception {
+        String inputBody = mapper.writeValueAsString(new LoginRequestDto("notnot@naver.com", givenPassword));
+        mvc.perform(post("/auth")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(inputBody))
+                .andExpect(status().is4xxClientError());
+    }
+
+    @Test
     @DisplayName("컨트롤러에서 ArgumentResolver 로 jwt 헤더에서 회원정보 파싱 - 성공")
     void memberInfoTest() throws Exception {
         String accessToken = authService.login(new LoginRequestDto(givenLoginId, givenPassword)).accessToken();
