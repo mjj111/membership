@@ -7,7 +7,7 @@ import com.aliens.membership.auth.entity.Member;
 import com.aliens.membership.auth.entity.RefreshToken;
 import com.aliens.membership.auth.repository.MemberRepository;
 import com.aliens.membership.auth.repository.RefreshTokenRepository;
-import com.aliens.membership.global.config.JwtProperties;
+import com.aliens.membership.global.config.property.JwtProperties;
 import com.aliens.membership.global.exception.ApiException;
 import com.aliens.membership.member.entity.enums.Gender;
 import com.aliens.membership.member.entity.enums.Role;

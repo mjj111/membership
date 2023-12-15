@@ -5,7 +5,7 @@ import com.aliens.membership.auth.dto.LoginRequestDto;
 import com.aliens.membership.auth.dto.MemberInfoForToken;
 import com.aliens.membership.auth.service.AuthService;
 import com.aliens.membership.global.api.Api;
-import com.aliens.membership.global.custom.jwt.LoginMember;
+import com.aliens.membership.global.custom.LoginMember;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

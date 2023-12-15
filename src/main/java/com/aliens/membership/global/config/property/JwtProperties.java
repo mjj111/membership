@@ -1,4 +1,4 @@
-package com.aliens.membership.global.config;
+package com.aliens.membership.global.config.property;
 
 import lombok.Getter;
 import lombok.Setter;
